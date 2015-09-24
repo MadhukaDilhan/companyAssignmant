@@ -17,13 +17,11 @@ namespace WSubmit_for_company
     {
         ManualResetEvent wait_handle = new ManualResetEvent(true);
 
+        // globle variable define
         static int ch = 0, Symbol = 0, alpNumaric = 0, AlNu = 0, spases = 0,counter = 0;
         static int checkthread = 0;
         static int brakethread = 0;
-        static long fileLength = 0;
-        
 
-        
         public Form1()
         {
             InitializeComponent();
@@ -36,8 +34,7 @@ namespace WSubmit_for_company
             dispaly_Value();
         }
 
-        
-
+        // this function use for display value
         private void dispaly_Value()
         {
             progressBar1.Value = 0;
@@ -67,7 +64,7 @@ namespace WSubmit_for_company
                 resetGloblevariable();
             }   
         }
-
+// reset globle variable
         private void resetGloblevariable() 
         {
             ch = 0; Symbol = 0; alpNumaric = 0; AlNu = 0; spases = 0; counter = 0;
@@ -75,8 +72,10 @@ namespace WSubmit_for_company
 
         public void file_read()
         {
-
+            // this is the gile path
             var txtFiles = Directory.EnumerateFiles(@"D:\\test/", "*.txt");
+
+            // get all files 
             foreach (string currentFile in txtFiles)
             {
 
@@ -92,13 +91,17 @@ namespace WSubmit_for_company
 
                  while (!sr.EndOfStream)
                 {
+
+                     // for use event haddle
                     wait_handle.WaitOne();
+                     // use this for brake the loop
                     if (brakethread == 1)
                     {
                         break;
                     }
-                    
+                    // calculating part
                     line = sr.ReadLine();
+                    i++;
                     line.Trim();
                     fields = line.Split(delim.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     counter += fields.Length;
@@ -108,13 +111,10 @@ namespace WSubmit_for_company
                     AlNu += line.Count(Char.IsNumber);
                     Symbol += line.Count(Char.IsSymbol);
                     alpNumaric += line.Count(char.IsLetterOrDigit);
-
-                    
-
-                    i++;
-                   
+ 
                 }
                  ch--;
+                 
             }
 
              checkthread = 1;
@@ -125,12 +125,12 @@ namespace WSubmit_for_company
         {
             wait_handle.Reset();
         }
-
+// resumbutton click 
         private void Resume_Click(object sender, EventArgs e)
         {
             wait_handle.Set();
         }
-
+// stop button click
         private void Stop_Click(object sender, EventArgs e)
         {
             brakethread = 1;

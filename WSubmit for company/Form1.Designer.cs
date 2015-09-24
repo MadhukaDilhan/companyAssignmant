@@ -54,7 +54,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Open File Path";
+            this.button1.Text = "RUN";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -211,7 +211,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(234, 23);
             this.progressBar1.TabIndex = 17;
-            
             // 
             // Form1
             // 
